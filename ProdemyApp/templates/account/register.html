@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load crispy_forms_tags %}
 
 <section class="section-content padding-y">
 	<div class="card mx-auto" style="max-width:520px; margin-top:40px;">
@@ -8,53 +9,10 @@
 		<header class="mb-4"><h4 class="card-title">Sign up</h4></header>
 		<form method="POST">
       {% csrf_token %}
-				<div class="form-row">
-					<div class="col form-group">
-						<label>User name</label>
-					</br>
-					  	{{ form.username }}
-					</div>
-					<div class="col form-group">
-						<label>First name</label>
-					</br>
-					  	{{ form.first_name }}
-					</div>
-					<div class="col form-group">
-						<label>Last name</label>
-					</br>
-					  	{{ form.last_name }}
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-					  <label>Email Address</label>
-					</br>
-					  {{ form.email }}
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Create password</label>
-					    {{ form.password1 }}
-					</div>
-					<div class="form-group col-md-6">
-						<label>Repeat password</label>
-					</br>
-            			{{ form.password2 }}
-					</div>
-					<div class="form-group col-md-6">
-						<label>Cleck</label>
-            			{{ form.check }}
-					</div>
-				</div>
-			    <div class="form-group">
+			{{form|crispy}}
 			        <button type="submit" class="btn btn-primary btn-block"> Sign in  </button>
 			    </div>
 			</form>
-		</article>
-    </div>
-    <p class="text-center mt-4">Have an account? <a href="#">Log In</a></p>
-    <br><br>
 </section>
 
 {% endblock %}

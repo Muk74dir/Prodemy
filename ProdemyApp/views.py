@@ -12,10 +12,11 @@ class SigninView(View):
 
     def post(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST)
+        print(form)
         if form.is_valid():
             print('Valid')
             form.save()
-            return redirect('login')
+            return redirect('home')
         '''
         user = form.save(commit=False)
         if user.email == 'sifat.sbs@gmail.com':
