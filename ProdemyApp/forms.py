@@ -4,4 +4,4 @@ from django import forms
 class RegistrationForm(UserCreationForm):
     class Meta:
         model =  User
-        fields = ['email','name','AccountType']
+        fields = ['email','name','AccounType']
