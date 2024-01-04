@@ -22,7 +22,7 @@ class SigninView(View):
         else:
             form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
-
+  
 class user_login(View):
     template_name = "account/login.html"
     
@@ -36,4 +36,8 @@ class user_login(View):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home')    
+            return redirect('home')
+          
+def teacherDashboard(request):
+    return render(request, 'account/teacherDashboard.html')
+

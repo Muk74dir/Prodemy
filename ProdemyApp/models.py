@@ -110,6 +110,13 @@ class BlogPostModel(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
 
+class LectureNoteModel(models.Model):
+    note_title = models.CharField(max_length = 50)
+    course = models.ForeignKey(course, on_delete = models.CASCADE)
+    instructor = models.ForeignKey(User, on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+    content = models.FileField(upload_to='images/notes')
+
 class BlogCommentModel(models.Model):
     comment_by = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(BlogPostModel, on_delete=models.CASCADE)
