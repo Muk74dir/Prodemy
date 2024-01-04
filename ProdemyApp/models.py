@@ -55,7 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
  
 class AddressModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     street = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
@@ -72,7 +72,7 @@ class CouseCategoryModel(models.Model):
     
 class CourseModel(models.Model):
     category = models.ForeignKey(CouseCategoryModel, on_delete=models.CASCADE)
-    instructor = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     description = models.TextField()
@@ -87,12 +87,12 @@ class CourseModel(models.Model):
         return self.title
     
 class MyCourseModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     is_Completed = models.BooleanField(default=False)
 
 class AnnouncementModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
@@ -101,7 +101,7 @@ class AnnouncementModel(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class BlogPostModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     description = models.TextField()
@@ -111,13 +111,13 @@ class BlogPostModel(models.Model):
     
 
 class BlogCommentModel(models.Model):
-    comment_by = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    comment_by = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(BlogPostModel, on_delete=models.CASCADE)
     comment = models.TextField()
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
 class AssignmentModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
@@ -125,13 +125,13 @@ class AssignmentModel(models.Model):
     deadline = models.DateTimeField()
     
 class AssignmentSubmissionModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     assignment = models.ForeignKey(AssignmentModel, on_delete=models.CASCADE)
     file = models.FileField(upload_to='/assignment_submission_files', blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
 class QuestionModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
@@ -146,13 +146,13 @@ class MCQModel(models.Model):
     answer = models.CharField(max_length=50)
     
 class CertificateModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     file = models.FileField(upload_to='/certificate_template', blank=True, null=True)
     achived_at = models.DateTimeField(auto_now_add=True)
     
 class PaymentModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     payment_id = models.CharField(max_length=50)
@@ -166,7 +166,7 @@ class CouponModel(models.Model):
     
     
 class FeedbackModel(models.Model):
-    person = models.ForeignKey(PersonModel, on_delete=models.CASCADE)
+    person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     feedback = models.TextField()
