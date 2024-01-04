@@ -41,3 +41,13 @@ class user_login(View):
 def teacherDashboard(request):
     return render(request, 'account/teacherDashboard.html')
 
+
+def certificate_view(request):
+    context = {
+        'learner_name': 'Obaydul Hasan Nayeem',
+        'course_title': 'Introduction to Django',
+        'issue_date': 'January 4, 2024',
+        'instructor_name': 'Saiful Islam',
+    }
+
+    return render(request, 'ProdemyApp/certificate.html', context)
