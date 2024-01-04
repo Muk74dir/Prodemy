@@ -1,4 +1,5 @@
 *migrations
 *__init__.py
 venv
-slkdsflksdf
+*__pycache__/
+db.sqlite3
