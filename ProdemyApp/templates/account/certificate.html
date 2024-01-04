@@ -1,47 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base_template.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate of Completion</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            margin: 20px;
-        }
+{% load static %}
 
-        h1 {
-            color: #3498db;
-        }
+{% block title %}Certificate of Completion{% endblock %}
 
-        h2 {
-            color: #2ecc71;
-        }
-
-        h3 {
-            color: #e74c3c;
-        }
-
-        p {
-            margin: 10px 0;
-        }
-
-        footer {
-            margin-top: 20px;
-            background-color: #f1f1f1;
-            padding: 10px;
-        }
-
-        footer p {
-            color: #333;
-            font-size: 14px;
-        }
-    </style>
-</head>
-
-<body>
+{% block content %}
     <h1>Certificate of Completion</h1>
 
     <p>This is to certify that</p>
@@ -53,10 +16,4 @@
     <p>Issued on {{ issue_date }}</p>
 
     <p>Course Instructor: {{ instructor_name }}</p>
-
-    <footer>
-        <p>Prodemy Learning Management System</p>
-    </footer>
-</body>
-
-</html>
+{% endblock %}
