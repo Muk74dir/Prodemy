@@ -19,12 +19,8 @@ class SigninView(View):
             print('Valid')
             form.save()
             return redirect('home')
-        '''
-        user = form.save(commit=False)
-        if user.email == 'sifat.sbs@gmail.com':
-            user.is_staff = True  # Set is_staff to True to make the user a staff member
-            user.save()
-        '''
+        else:
+            form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
 
 class user_login(View):
