@@ -36,4 +36,4 @@ class user_login(View):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home') # profile page e redirect korbe    
+            return redirect('home')    

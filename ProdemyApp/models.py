@@ -65,7 +65,7 @@ class AddressModel(models.Model):
 class CouseCategoryModel(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
-    image = models.ImageField(upload_to='/category_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='media/category_thumnail', blank=True, null=True)
     
     def __str__(self):
         return self.name
@@ -78,7 +78,7 @@ class CourseModel(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
-    image = models.ImageField(upload_to='/course_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='media/course_thumnail', blank=True, null=True)
     
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -96,7 +96,7 @@ class AnnouncementModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='/announcement_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='media/announcement_thumnail', blank=True, null=True)
     
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -105,7 +105,7 @@ class BlogPostModel(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='/blog_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='media/blog_thumnail', blank=True, null=True)
     
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
@@ -121,13 +121,13 @@ class AssignmentModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    file = models.FileField(upload_to='/assignment_files', blank=True, null=True)
+    file = models.FileField(upload_to='media/assignment_files', blank=True, null=True)
     deadline = models.DateTimeField()
     
 class AssignmentSubmissionModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     assignment = models.ForeignKey(AssignmentModel, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='/assignment_submission_files', blank=True, null=True)
+    file = models.FileField(upload_to='media/assignment_submission_files', blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
 class QuestionModel(models.Model):
@@ -135,7 +135,7 @@ class QuestionModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    file = models.FileField(upload_to='/question_files', blank=True, null=True)
+    file = models.FileField(upload_to='media/question_files', blank=True, null=True)
     
 class MCQModel(models.Model):
     question = models.ForeignKey(QuestionModel, on_delete=models.CASCADE)
@@ -148,7 +148,7 @@ class MCQModel(models.Model):
 class CertificateModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
-    file = models.FileField(upload_to='/certificate_template', blank=True, null=True)
+    file = models.FileField(upload_to='media/certificate_template', blank=True, null=True)
     achived_at = models.DateTimeField(auto_now_add=True)
     
 class PaymentModel(models.Model):
