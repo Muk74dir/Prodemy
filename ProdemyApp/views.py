@@ -26,5 +26,5 @@ class SigninView(View):
         return render(request, self.template_name, {'form': form})
 
 
-def StudentHome(request):
-    return render(request, 'account/studentHome.html')
+def teacherDashboard(request):
+    return render(request, 'account/teacherDashboard.html')
