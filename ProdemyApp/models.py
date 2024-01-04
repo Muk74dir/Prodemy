@@ -63,3 +63,10 @@ class course(models.Model):
     def __str__(self):
         return self.title
 
+
+class LectureNoteModel(models.Model):
+    note_title = models.CharField(max_length = 50)
+    course = models.ForeignKey(course, on_delete = models.CASCADE)
+    instructor = models.ForeignKey(User, on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add = True)
+    content = models.FileField(upload_to='images/notes')

@@ -24,3 +24,7 @@ class SigninView(View):
             user.save()
         '''
         return render(request, self.template_name, {'form': form})
+
+
+def StudentHome(request):
+    return render(request, 'account/studentHome.html')
