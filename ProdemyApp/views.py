@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import RegistrationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth import login,logout,authenticate
 # Create your views here.
 
 class SigninView(View):
@@ -17,14 +19,25 @@ class SigninView(View):
             print('Valid')
             form.save()
             return redirect('home')
-        '''
-        user = form.save(commit=False)
-        if user.email == 'sifat.sbs@gmail.com':
-            user.is_staff = True  # Set is_staff to True to make the user a staff member
-            user.save()
-        '''
+        else:
+            form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
-
-
+  
+class user_login(View):
+    template_name = "account/login.html"
+    
+    def get(self, request, *args, **kwargs):
+        form = AuthenticationForm()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request, *args, **kwargs):
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+          
 def teacherDashboard(request):
     return render(request, 'account/teacherDashboard.html')
+
