@@ -1,19 +1,16 @@
-{% extends 'base_template.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 
 {% block title %}Certificate of Completion{% endblock %}
 
 {% block content %}
+
+<div class="certificate-container">
     <h1>Certificate of Completion</h1>
+    <p>This certificate is awarded to: <span class="learner-name"></span></p>
+    <p>For successfully completing the course: <span class="course-title"></span></p>
+    <p>Completion Date: <span class="completion-date"></span></p>
+    </div>
 
-    <p>This is to certify that</p>
-    <h2>{{ learner_name }}</h2>
-
-    <p>Has successfully completed the course</p>
-    <h3>{{ course_title }}</h3>
-
-    <p>Issued on {{ issue_date }}</p>
-
-    <p>Course Instructor: {{ instructor_name }}</p>
 {% endblock %}

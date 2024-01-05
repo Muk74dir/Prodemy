@@ -50,4 +50,28 @@ def certificate_view(request):
         'instructor_name': 'Saiful Islam',
     }
 
-    return render(request, 'ProdemyApp/certificate.html', context)
+    return render(request, 'account/certificate.html', context)
+
+# from django.shortcuts import render, get_object_or_404
+# from django.template.loader import render_to_string
+# import weasyprint  # Or ReportLab, as preferred
+# from .models import MyCourseModel
+
+# def generate_certificate(request, learner_id, course_id):
+#     # learner = get_object_or_404(Learner, pk=learner_id)
+#     learner = "Nayeem"
+#     course = get_object_or_404(MyCourseModel, pk=course_id)
+
+#     # Fetch template (example using a default template)
+#     template_html = render_to_string("certificate.html", {
+#         "learner_name": learner.name,
+#         "course_title": course.title,
+#         "completion_date": course.completion_date,
+#         # ... other data
+#     })
+
+#     # Render PDF
+#     html = weasyprint.HTML(string=template_html)
+#     pdf = html.write_pdf()
+
+#     # Store PDF and send email (details omitted for brevity)

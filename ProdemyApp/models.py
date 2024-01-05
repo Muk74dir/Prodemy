@@ -53,7 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name or self.email.split('@')[0]
 
- 
+
 class AddressModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     street = models.CharField(max_length=50)
@@ -62,7 +62,7 @@ class AddressModel(models.Model):
     zip = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     
-class CouseCategoryModel(models.Model):
+class CourseCategoryModel(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     image = models.ImageField(upload_to='media/category_thumnail', blank=True, null=True)
@@ -71,7 +71,7 @@ class CouseCategoryModel(models.Model):
         return self.name
     
 class CourseModel(models.Model):
-    category = models.ForeignKey(CouseCategoryModel, on_delete=models.CASCADE)
+    category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
@@ -112,7 +112,7 @@ class BlogPostModel(models.Model):
 
 class LectureNoteModel(models.Model):
     note_title = models.CharField(max_length = 50)
-    course = models.ForeignKey(course, on_delete = models.CASCADE)
+    course = models.ForeignKey(CourseModel, on_delete = models.CASCADE)
     instructor = models.ForeignKey(User, on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add = True)
     content = models.FileField(upload_to='images/notes')
@@ -157,7 +157,13 @@ class CertificateModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     file = models.FileField(upload_to='media/certificate_template', blank=True, null=True)
     achived_at = models.DateTimeField(auto_now_add=True)
-    
+
+# class CertificateModel2(models.Model):
+#     learner = models.ForeignKey("Learner", on_delete=models.CASCADE)
+#     course = models.ForeignKey("Course", on_delete=models.CASCADE)
+#     completion_date = models.DateField()
+#     unique_identifier = models.UUIDField(default=uuid.uuid4)
+
 class PaymentModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
