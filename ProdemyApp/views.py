@@ -50,4 +50,4 @@ def certificate_view(request):
         'instructor_name': 'Saiful Islam',
     }
 
-    return render(request, 'ProdemyApp/certificate.html', context)
+    return render(request, 'account/certificate.html', context)
