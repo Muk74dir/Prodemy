@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from django.views import View
+from django.views.generic import View, CreateView
 from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import login,logout,authenticate
+from .models import CourseModel
 
 class SigninView(View):
     template_name = "account/register.html"  # Update with the correct template name
@@ -50,3 +51,14 @@ def certificate_view(request):
     }
 
     return render(request, 'account/certificate.html', context)
+
+
+class VideoPlayerView(CreateView):
+    template_name = 'views/player.html'
+    context = {}
+    
+    def get(self, request):
+        course = CourseModel.objects.all()
+        self.context['course'] = course
+        return render(request, self.template_name, self.context)
+        
