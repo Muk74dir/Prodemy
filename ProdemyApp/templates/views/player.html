@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+{% block content %}
+
+<section class="container">
+    <div>
+        {% for c in course %}
+            {% video c.url %}
+            {{ c.title }}
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

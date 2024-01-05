@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
+from embed_video.fields import EmbedVideoField
 from django.utils import timezone
 from .constans import ACCOUNT_TYPE
 
@@ -74,7 +75,8 @@ class CourseModel(models.Model):
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(auto_created=True, max_length=50)
+    video_url = EmbedVideoField()
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.DecimalField(max_digits=2, decimal_places=1)

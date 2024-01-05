@@ -9,4 +9,5 @@ urlpatterns = [
    # path('profile/',views.MyTemplateView.as_view(), name='profile'),
     path('teacherDashboard/', views.teacherDashboard, name='teacherDashboard'),
     path('certificate/', views.certificate_view, name='certificate_view'),
+    path('player/', views.VideoPlayerView.as_view(), name='player'),
 ]
