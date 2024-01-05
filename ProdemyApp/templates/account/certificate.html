@@ -14,6 +14,7 @@
     <p>For successfully completing the course: <span class="course-title">{{ course_title }}</span></p>
     <p>Completion Date: <span class="completion-date">{{ issue_date }}</span></p>
     <p>Course Instructor: <span class="instructor-name">{{ instructor_name }}</span></p>
+    <button id="downloadBtn">Download as PDF</button>
 </div>
 
 <style>
@@ -48,5 +49,13 @@
         color: #333;
     }
 </style>
+
+<script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', function () {
+        var element = document.querySelector('.certificate-container');
+        html2pdf(element);
+    });
+</script>
 
 {% endblock %}
