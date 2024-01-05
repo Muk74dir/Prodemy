@@ -89,7 +89,7 @@
                 {% if request.user.AccounType == "Student" %}
                 <a href="#" class="nav-item nav-link">My Courses</a>
                 {% elif request.user.AccounType == "Instructor" %}
-                <a href="#" class="nav-item nav-link">Dashboard</a>
+                <a href="{% url 'teacherDashboard' %}" class="nav-item nav-link">Dashboard</a>
                 {% endif %}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
@@ -98,18 +98,19 @@
                         <a href="appointment.html" class="dropdown-item">2</a>
                         <a href="team.html" class="dropdown-item">3</a>
                         <a href="testimonial.html" class="dropdown-item">4</a>
-                        <a href="404.html" class="dropdown-item">5  </a>
+                        <a href="404.html" class="dropdown-item">5 </a>
                     </div>
                 </div>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="#" class="nav-item nav-link">Contact</a>
                 <a href="{% url 'login' %}" class="nav-item nav-link">Log in</a>
             </div>
-            <a href="{% url 'signup' %}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Sign Up<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="{% url 'signup' %}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Sign Up<i
+                    class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
-    <hr>    
+    <hr>
 
     {% block content %}
     <!-- content -->
