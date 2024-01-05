@@ -7,9 +7,11 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = ['id','name','email']
 
 @admin.register(CourseCategoryModel)
-class CourseAdmin(admin.ModelAdmin):
+class CourseCategoryAdmin(admin.ModelAdmin):
     list_display = ['id','name','slug']
+    prepopulated_fields = {'slug': ('name',)}
     
 @admin.register(CourseModel)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['id','title','price','instructor']
+    prepopulated_fields = {'slug': ('title',)}
