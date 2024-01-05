@@ -14,7 +14,7 @@
     <p>For successfully completing the course: <span class="course-title">{{ course_title }}</span></p>
     <p>Completion Date: <span class="completion-date">{{ issue_date }}</span></p>
     <p>Course Instructor: <span class="instructor-name">{{ instructor_name }}</span></p>
-    <button id="downloadBtn">Download as PDF</button>
+    <button id="downloadBtn" class="download-button" onclick="downloadCertificate()">Download as PDF</button>
 </div>
 
 <style>
@@ -27,7 +27,7 @@
 
     .certificate-container {
         background-color: #fff;
-        border: 2px solid #3498db; /* Added border */
+        border: 2px solid #2d5e91; 
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
@@ -36,7 +36,7 @@
     }
 
     h1 {
-        color: #3498db;
+        color: #2d5e91;
     }
 
     p {
@@ -48,14 +48,30 @@
         font-weight: bold;
         color: #333;
     }
+
+    .download-button {
+        background-color: #2d5e91;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .download-button:hover {
+        background-color: #267bb5;
+    }
 </style>
 
 <script src="https://rawgit.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 <script>
-    document.getElementById('downloadBtn').addEventListener('click', function () {
+    function downloadCertificate() {
         var element = document.querySelector('.certificate-container');
         html2pdf(element);
-    });
+        document.getElementById('downloadBtn').style.display = 'none'; // Hide the button
+    }
 </script>
 
 {% endblock %}
