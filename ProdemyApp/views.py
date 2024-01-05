@@ -3,7 +3,6 @@ from django.views import View
 from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import login,logout,authenticate
-# Create your views here.
 
 class SigninView(View):
     template_name = "account/register.html"  # Update with the correct template name

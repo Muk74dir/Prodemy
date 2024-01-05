@@ -75,7 +75,7 @@ class CourseModel(models.Model):
     category = models.ForeignKey(CourseCategoryModel, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(auto_created=True, max_length=50)
     video_url = EmbedVideoField()
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
