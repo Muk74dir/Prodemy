@@ -18,7 +18,7 @@ class SigninView(View):
         if form.is_valid():
             print('Valid')
             form.save()
-            return redirect('home')
+            return redirect('login')
         '''
         user = form.save(commit=False)
         if user.email == 'sifat.sbs@gmail.com':
@@ -40,4 +40,6 @@ class user_login(View):
         user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('home') # profile page e redirect korbe    
+            return redirect('home') # profile page e redirect korbe
+        form = AuthenticationForm()
+        return render(request, self.template_name, {'form': form})
