@@ -57,8 +57,8 @@ class VideoPlayerView(CreateView):
     template_name = 'views/player.html'
     context = {}
     
-    def get(self, request):
-        course = CourseModel.objects.all()
+    def get(self, request, id):
+        course = CourseModel.objects.get(id=id)
         self.context['course'] = course
         return render(request, self.template_name, self.context)
         

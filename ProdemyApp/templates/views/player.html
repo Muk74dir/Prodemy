@@ -4,10 +4,9 @@
 
 <section class="container">
     <div>
-        {% for c in course %}
-            {% video c.url %}
-            {{ c.title }}
-        {% endfor %}
+        <h1>{{ course.title }}</h1>
+        {% video course.video_url '800x400' %}
+        <p>{{ course.description }}</p>
     </div>
 </section>
 
