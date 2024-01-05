@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
+from embed_video.fields import EmbedVideoField
 from django.utils import timezone
 from .constans import ACCOUNT_TYPE
 
