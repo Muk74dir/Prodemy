@@ -6,11 +6,47 @@
 
 {% block content %}
 
+<br/><br/>
+
 <div class="certificate-container">
     <h1>Certificate of Completion</h1>
-    <p>This certificate is awarded to: <span class="learner-name"></span></p>
-    <p>For successfully completing the course: <span class="course-title"></span></p>
-    <p>Completion Date: <span class="completion-date"></span></p>
-    </div>
+    <p>This certificate is awarded to: <span class="learner-name">{{ learner_name }}</span></p>
+    <p>For successfully completing the course: <span class="course-title">{{ course_title }}</span></p>
+    <p>Completion Date: <span class="completion-date">{{ issue_date }}</span></p>
+    <p>Course Instructor: <span class="instructor-name">{{ instructor_name }}</span></p>
+</div>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        margin: 20px;
+        background-color: #f4f4f4;
+    }
+
+    .certificate-container {
+        background-color: #fff;
+        border: 2px solid #3498db; /* Added border */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    h1 {
+        color: #3498db;
+    }
+
+    p {
+        margin: 10px 0;
+        color: #555;
+    }
+
+    .learner-name, .course-title, .completion-date, .instructor-name {
+        font-weight: bold;
+        color: #333;
+    }
+</style>
 
 {% endblock %}
