@@ -4,6 +4,7 @@ from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import login,logout,authenticate
 from .models import CourseModel, AnnouncementModel
+from .forms import AnnouncementForm
 
 class SigninView(View):
     template_name = "account/register.html"  # Update with the correct template name
@@ -61,6 +62,16 @@ class VideoPlayerView(CreateView):
         course = CourseModel.objects.get(id=id)
         self.context['course'] = course
         return render(request, self.template_name, self.context)
+
+def Announcement(request):
+     if request.method == 'POST':
+        form = AnnouncementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  
+            return redirect('teacherDashboard')
+     else:
+        form = AnnouncementForm()
+     return render(request, 'account/create_announcement.html', {'form': form})
 
 
 def MyCourses(request):
