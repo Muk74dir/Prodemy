@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
 	'crispy_bootstrap5',
-    'embed_video',
+    # 'embed_video',
     'ProdemyApp',
 ]
 AUTH_USER_MODEL = 'ProdemyApp.User'

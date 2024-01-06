@@ -10,4 +10,5 @@ urlpatterns = [
     path('teacherDashboard/', views.teacherDashboard, name='teacherDashboard'),
     path('certificate/', views.certificate_view, name='certificate_view'),
     path('player/<int:id>', views.VideoPlayerView.as_view(), name='player'),
+    path('category/',views.CategoryView.as_view(), name='category'),
 ]
