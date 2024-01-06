@@ -87,7 +87,7 @@
             <div class="navbar-nav ms-auto p-4 p-lg-0">
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 {% if request.user.AccounType == "Student" %}
-                <a href="#" class="nav-item nav-link">My Courses</a>
+                <a href="{% url 'mycourses' %}" class="nav-item nav-link">My Courses</a>
                 {% elif request.user.AccounType == "Instructor" %}
                 <a href="{% url 'teacherDashboard' %}" class="nav-item nav-link">Dashboard</a>
                 {% endif %}
@@ -101,7 +101,7 @@
                         <a href="404.html" class="dropdown-item">5 </a>
                     </div>
                 </div>
-                <a href=" {% url "player" 1 %} " class="nav-item nav-link">About</a>
+                <a href="{% url 'player' 1 %}" class=" nav-item nav-link">About</a>
                 <a href="#" class="nav-item nav-link">Contact</a>
                 <a href="{% url 'login' %}" class="nav-item nav-link">Log in</a>
             </div>
