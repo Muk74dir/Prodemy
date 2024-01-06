@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, CourseCategoryModel, CourseModel
+from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel
 
 # Register your models here.
 @admin.register(User)
@@ -15,3 +15,7 @@ class CourseCategoryAdmin(admin.ModelAdmin):
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['id','title','price','instructor']
     prepopulated_fields = {'slug': ('title',)}
+    
+@admin.register(AnnouncementModel)
+class AnnouncementAdmin(admin.ModelAdmin):
+    list_display = ['person', 'course', 'title', 'description', 'image']
