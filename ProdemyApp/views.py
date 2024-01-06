@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView,ListView
 from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import login,logout,authenticate
-from .models import CourseModel, AnnouncementModel
+from .models import CourseModel, AnnouncementModel,CourseCategoryModel
 from .forms import AnnouncementForm
 
 class SigninView(View):
@@ -83,3 +83,10 @@ def DeleteAnnouncement(request, announcement_id):
     announcement = get_object_or_404(AnnouncementModel, id = announcement_id)
     announcement.delete()
     return render(request, 'account/mycourses.html')
+
+
+
+class CategoryView(ListView):
+    model = CourseCategoryModel
+    template_name = 'views/Category_list.html'
+    context_object_name = 'Categories'
