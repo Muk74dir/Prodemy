@@ -29,6 +29,7 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank=True, default='', unique=True)
     name = models.CharField(max_length=255, blank=True, default='')
+    image = models.ImageField(upload_to='dp/image',blank=False)
     AccounType = models.CharField(choices=ACCOUNT_TYPE,max_length = 20)
     
     is_active = models.BooleanField(default=True)
