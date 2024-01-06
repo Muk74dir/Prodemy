@@ -88,5 +88,5 @@ def DeleteAnnouncement(request, announcement_id):
 
 class CategoryView(ListView):
     model = CourseCategoryModel
-    template_name = 'views/Category_list.html'
+    template_name = 'views/category_list.html'
     context_object_name = 'Categories'
