@@ -32,3 +32,4 @@ class AnnouncementForm(ModelForm):
                 'description' : ('Write Announcement Description'),
                 'image' : ('Add Announcement Image')
             }
+

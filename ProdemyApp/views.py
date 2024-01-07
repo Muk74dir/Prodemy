@@ -1,3 +1,11 @@
+from django.shortcuts import render, redirect
+from django.views.generic import View,TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .forms import RegistrationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
+from django.contrib.auth import login,logout,authenticate
+from .models import CourseModel
+from .models import User
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import View, CreateView
 from .forms import RegistrationForm
@@ -5,6 +13,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Se
 from django.contrib.auth import login,logout,authenticate
 from .models import CourseModel, AnnouncementModel
 from .forms import AnnouncementForm
+
 
 class SigninView(View):
     template_name = "account/register.html"  # Update with the correct template name
@@ -14,12 +23,12 @@ class SigninView(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = RegistrationForm(request.POST)
+        form = RegistrationForm(request.POST,request.FILES)
         print(form)
         if form.is_valid():
             print('Valid')
             form.save()
-            return redirect('home')
+            return redirect('login')
         else:
             form = RegistrationForm()
         return render(request, self.template_name, {'form': form})
@@ -38,10 +47,22 @@ class user_login(View):
         if user is not None:
             login(request, user)
             return redirect('home')
+        form = AuthenticationForm()
+        return render(request, self.template_name, {'form': form})
+
+class user_logout(View):
+    def get(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('home')
+
+class user_profile(DetailView):
+    model = User
+    template_name = "account/profile.html"
+    context_object_name = 'user'
+
           
 def teacherDashboard(request):
     return render(request, 'account/teacherDashboard.html')
-
 
 def certificate_view(request):
     context = {
