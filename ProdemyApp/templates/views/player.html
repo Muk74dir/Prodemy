@@ -1,14 +1,53 @@
 {% extends 'base.html' %}
-{% load embed_video_tags %}
 {% block content %}
 
-<section class="container">
-    <div>
-        {% for c in course %}
-            {% video c.url %}
-            {{ c.title }}
-        {% endfor %}
+<style>
+
+
+  .toaster {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #28a745; /* Green color, you can adjust as needed */
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+</style>
+
+<section class="container d-flex align-items-center justify-content-center">
+    <link href="https://vjs.zencdn.net/5.10.4/video-js.css" rel="stylesheet">
+    <div class="custom-video-player">
+        <h1>{{course.title}}</h1>
+        <div class="video-container">
+            <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="800" height="auto" data-setup='{"playbackRates": [1, 1.5, 2, 2.5, 3] }'>
+                <source src="{{course.video.url}}" type='video/mp4'>
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
+        </div>
+        <p>{{course.description}}</p>
+    </div>
+
+    <!-- Live Support Toaster -->
+    <div class="toaster" id="liveSupportToaster" onclick="openChat()">
+        Live Support Available! Click to chat.
     </div>
 </section>
 
+<script src="https://vjs.zencdn.net/5.10.4/video.js"></script>
+<script>
+    function openChat() {
+        alert('Open live chat!');
+    }
+
+    setTimeout(function () {
+        document.getElementById('liveSupportToaster').style.display = 'block';
+    }, 1);
+</script>
 {% endblock %}

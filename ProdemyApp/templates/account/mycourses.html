@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto">
+    <div>
+        <h3 class="text-center">All Announcement</h3>
+        <table class="table border border-1 table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Person</th>
+                    <th scope="col">Courses</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for announcement in announcements %}
+                <tr>
+                    <th scope="row">{{announcement.person}}</th>
+                    <td>{{announcement.course}}</td>
+                    <td>{{announcement.title}}</td>
+                    <td>{{announcement.description}}</td>
+                    <td>
+                        <a href="{% url 'delete_announcement' announcement.id %}">x</a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function hideRow(element) {
+        var row = element.parentNode;
+        row.style.display = "none";
+    }
+</script>
+{% endblock %}
