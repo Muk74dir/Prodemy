@@ -1,0 +1,85 @@
+<!-- products_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 style="text-align: center; margin: 20px; ">Category List</h1>
+
+<div class="category-container">
+
+    <div class="category_name">
+        {{category.name }}
+   </div>
+    {% for category in Categories %}
+        <div class="category-card">
+            <div class="category_name">
+                {{category.name }}
+           </div>
+             {% if category.image%}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+            {%endif%}
+            <div class="category-details">
+                 <a href="#" class = "category-details" >Details</a>
+            </div>
+         
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+
+    body {
+        margin: 80px; /* Add margin to the body for space around the content */
+    }
+
+   
+    .category-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .category-card {
+        width: 33%; /* Adjust as needed */
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .category-image {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .category_name {
+        text-align: center; 
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold; 
+        color: green;
+        transition: color 0.5;
+    }
+
+    .category-details {
+        color: green;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        transition: color 1s; 
+    }
+
+    .category_name:hover {
+        color: red; 
+    }
+
+    .category-card:hover .category-image {
+        transform: scale(1.02); /* Apply a scale transformation on hover */
+    }
+
+    
+    
+</style>
+
+{% endblock %}

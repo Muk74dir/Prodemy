@@ -7,12 +7,14 @@ from django.contrib.auth import login,logout,authenticate
 from .models import CourseModel
 from .models import User
 from django.shortcuts import render, redirect,get_object_or_404
-from django.views.generic import View, CreateView
+from django.views.generic import View, CreateView,ListView
 from .forms import RegistrationForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.contrib.auth import login,logout,authenticate
-from .models import CourseModel, AnnouncementModel
+from .models import CourseModel, AnnouncementModel,CourseCategoryModel, CouponModel
 from .forms import AnnouncementForm
+from django.urls import reverse_lazy
+from django.utils.text import slugify
 
 
 class SigninView(View):
@@ -104,3 +106,37 @@ def DeleteAnnouncement(request, announcement_id):
     announcement = get_object_or_404(AnnouncementModel, id = announcement_id)
     announcement.delete()
     return render(request, 'account/mycourses.html')
+
+
+
+class CategoryView(ListView):
+    model = CourseCategoryModel
+    template_name = 'views/category_list.html'
+    context_object_name = 'Categories'
+    
+class CreateCategoryView(CreateView):
+    model = CourseCategoryModel
+    template_name = 'views/create_category.html'
+    fields = ('name',)
+    success_url = reverse_lazy('category')
+    
+    def form_valid(self, form):
+        form.instance.slug = slugify(form.instance.name)
+        return super().form_valid(form)
+
+# class CategoryTopDownView(ListView):
+#     model = CourseCategoryModel
+#     template_name = 'base.html'
+#     context_object_name = 'Categories'
+
+class CategoryDetailsView(View):
+    template_name = 'views/category_details.html'  
+    model = CourseCategoryModel
+    
+    
+    def get(self, request, slug):
+        category = get_object_or_404(CourseCategoryModel, slug=slug) 
+        course = CourseModel.objects.filter(category=category)
+        Categories = CourseCategoryModel.objects.all()
+        context = {'category': category, 'Courses' : course, 'Categories' : Categories}
+        return render(request, self.template_name, context)
