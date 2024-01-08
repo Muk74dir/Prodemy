@@ -80,7 +80,6 @@ class CourseModel(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     image = models.ImageField(upload_to='course_thumnail', blank=True, null=True)
-    
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

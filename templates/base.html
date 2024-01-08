@@ -94,11 +94,9 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="feature.html" class="dropdown-item">1</a>
-                        <a href="appointment.html" class="dropdown-item">2</a>
-                        <a href="team.html" class="dropdown-item">3</a>
-                        <a href="testimonial.html" class="dropdown-item">4</a>
-                        <a href="404.html" class="dropdown-item">5 </a>
+                        {% for category in Categories %}
+                        <a href="{% url 'category_details' category.slug %}" class="dropdown-item">{{category.name}}</a>
+                        {% endfor %}
                     </div>
                 </div>
                 <a href="{% url 'player' 1 %}" class=" nav-item nav-link">About</a>

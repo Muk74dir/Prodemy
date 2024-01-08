@@ -19,3 +19,6 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(AnnouncementModel)
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ['person', 'course', 'title', 'description', 'image']
+    
+
+

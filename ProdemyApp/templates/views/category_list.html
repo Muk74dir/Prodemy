@@ -15,7 +15,9 @@
             <div class="category_name">
                 {{category.name }}
            </div>
+             {% if category.image%}
             <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+            {%endif%}
             <div class="category-details">
                  <a href="#" class = "category-details" >Details</a>
             </div>
