@@ -1,10 +1,14 @@
 from django.contrib import admin
-from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel
+from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel ,AddressModel
 
 # Register your models here.
 @admin.register(User)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['id','name','email']
+
+@admin.register(AddressModel)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id','person','street','city','state','zip','country']
 
 @admin.register(CourseCategoryModel)
 class CourseCategoryAdmin(admin.ModelAdmin):
