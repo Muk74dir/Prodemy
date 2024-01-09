@@ -1,13 +1,19 @@
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, AnnouncementModel
 from django.forms import ModelForm,Textarea
-
+from django import forms
+from .models import AddressModel
+from django.contrib.auth.decorators import login_required
 
 class RegistrationForm(UserCreationForm):
     class Meta:
         model =  User
-        fields = ['email','name','AccounType']
-   
+        fields = ['email','name','image','AccounType']
+        
+class addressform(forms.ModelForm):
+    class Meta:
+        model = AddressModel
+        fields = ['street', 'city', 'state', 'zip', 'country']
 
 class AnnouncementForm(ModelForm):
     def __init__(self, *args, **kwargs):

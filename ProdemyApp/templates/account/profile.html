@@ -11,15 +11,23 @@
        <div class="row vh-100">
            <div class="col-xl-6 text-center mx-auto align-self-center ">
                 <div class="imgcover mb-4">
-                    <img src="{{ user.image.url }}" class="rounded-pill bg-white p-2 shadow" alt="">
+                    <img src="{{ profile.image.url }}" class="rounded-pill bg-white p-2 shadow" alt="">
                 </div>
-                <b class="fs-3">{{ user.name }}</b>
+                <b class="fs-3">{{ profile.name }}</b>
                 <h1 class="fw-bold mb-4 fs-1">Full Stack Develper</h1>
                 <p>Mauris cursus libero eu gravida malesuada. Vivamus efficitur sollicitudin tincidunt. Vivamus iaculis, est et posuere facilisis, sem nisi volutpat enim, eget hendrerit libero ligula quis lacus</p>
                 <ul>
                     <li></li>
                 </ul>
-                <button class="btn btn-outline-primary fw-bolder fs-7 px-4 py-2 mt-3 rounded-pill">Download Resume</button>
+                {% if address is None %}
+                <a href = "{% url 'addinfo' %}">
+                <button class="btn btn-outline-primary fw-bolder fs-7 px-4 py-2 mt-3 rounded-pill">Give more inforrmation</button>
+                </a>
+                {% else %}
+                <a href = "{% url 'editinfo' %}">
+                  <button class="btn btn-outline-primary fw-bolder fs-7 px-4 py-2 mt-3 rounded-pill">Edit Information</button>
+                </a>
+                {% endif %}
             </div>
        </div>
     </div>
