@@ -28,7 +28,7 @@ class CustomUserManager(UserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(blank=True, default='', unique=True)
     name = models.CharField(max_length=255, blank=True, default='')
-    image = models.ImageField(upload_to='dp/image',blank=False)
+    image = models.ImageField(upload_to='dp/image',blank=False, default='default_image.jpg')
     AccounType = models.CharField(choices=ACCOUNT_TYPE,max_length = 20)
     
     is_active = models.BooleanField(default=True)
@@ -66,7 +66,7 @@ class AddressModel(models.Model):
 class CourseCategoryModel(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
-    image = models.ImageField(upload_to='category_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='category_thumnail', blank=True, null=True, default='default_image.jpg')
     
     def __str__(self):
         return self.name
@@ -80,7 +80,7 @@ class CourseModel(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
-    image = models.ImageField(upload_to='course_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='course_thumnail', blank=True, null=True, default='default_image.jpg')
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -97,7 +97,7 @@ class AnnouncementModel(models.Model):
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='announcement_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='announcement_thumnail', blank=True, null=True, default='default_image.jpg')
     
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -106,7 +106,7 @@ class BlogPostModel(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='blog_thumnail', blank=True, null=True)
+    image = models.ImageField(upload_to='blog_thumnail', blank=True, null=True, default='default_image.jpg')
     
     uploaded_at = models.DateTimeField(auto_now_add=True)
     

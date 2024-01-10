@@ -19,6 +19,7 @@ INSTALLED_APPS = [
 	'crispy_bootstrap5',
     'embed_video',
     'ProdemyApp',
+    'transactions',
 ]
 AUTH_USER_MODEL = 'ProdemyApp.User'
 CRISPY_ALLOWED_TEMPLATE_PACKS='bootstrap5'
