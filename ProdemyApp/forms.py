@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User, AnnouncementModel
 from django.forms import ModelForm,Textarea
 from django import forms
-from .models import AddressModel
+from .models import AddressModel,aboutInstractor
 from django.contrib.auth.decorators import login_required
 
 class RegistrationForm(UserCreationForm):
@@ -14,6 +14,11 @@ class addressform(forms.ModelForm):
     class Meta:
         model = AddressModel
         fields = ['street', 'city', 'state', 'zip', 'country']
+
+class aboutform(forms.ModelForm):
+    class Meta:
+        model = aboutInstractor
+        fields = ['description']
 
 class AnnouncementForm(ModelForm):
     def __init__(self, *args, **kwargs):
