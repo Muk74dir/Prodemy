@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import View,TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import RegistrationForm,addressform
+from .forms import RegistrationForm,addressform,AnnouncementForm,aboutform
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
-from .models import CourseModel
-from .models import User,AddressModel
+from .models import CourseModel,User,AddressModel,aboutInstractor,AnnouncementModel
 from django.contrib.auth import login,logout,authenticate
-from .models import CourseModel, AnnouncementModel
-from .forms import AnnouncementForm
 
 
 class SigninView(View):
@@ -53,10 +50,47 @@ class user_logout(View):
 class user_profile(View):
     template_name = "account/profile.html"
     
-    def get(self, request,pk, *args, **kwargs):
-        profile = User.objects.get(id = pk)
-        address = User.objects.get(id = pk)
-        return render(request, self.template_name, {'profile': profile,'address':address})
+    def get(self, request, *args, **kwargs):
+        about = aboutInstractor.objects.filter(person = request.user)
+        if about:
+            about = aboutInstractor.objects.get(person = request.user)
+            address = AddressModel.objects.filter(person = request.user)
+            return render(request, self.template_name, {'profile': request.user,'address':address,'about':about})
+        form = aboutform()
+        address = AddressModel.objects.filter(person = request.user)
+        return render(request, self.template_name, {'profile': request.user,'address':address,'form':form})
+    
+    def post(self, request, *args, **kwargs):
+        form = aboutform(request.POST)
+        if form.is_valid():
+            about = form.save(commit=False)
+            about.person = request.user
+            about.save()
+            return redirect('profile')
+        else:
+            form = aboutform()
+        return render(request, self.template_name, {'form': form})
+    
+class editAbout(View):
+    template_name = "account/profile.html"
+    
+    def get(self, request, *args, **kwargs):
+        about = aboutInstractor.objects.get(person = request.user)
+        form = aboutform(instance = about)
+        return render(request, self.template_name, {'profile': request.user,'form':form})
+    
+    def post(self, request, *args, **kwargs):
+        about = aboutInstractor.objects.get(person = request.user)
+        form = aboutform(request.POST,instance = about)
+        print(form)
+        if form.is_valid():
+            about = form.save(commit=False)
+            about.person = request.user
+            about.save()
+            return redirect('profile')
+        else:
+            form = aboutform()
+        return render(request, self.template_name, {'form': form})
 
 class addinfo(View):
     template_name = "account/updateprofile.html"
@@ -67,12 +101,11 @@ class addinfo(View):
     
     def post(self, request, *args, **kwargs):
         form = addressform(request.POST)
-        print(form)
         if form.is_valid():
             address = form.save(commit=False)
             address.person = request.user
             address.save()
-            return redirect('profile',request.user.id)
+            return redirect('profile')
         else:
             form = addressform()
         return render(request, self.template_name, {'form': form})
@@ -94,7 +127,7 @@ class editinfo(View):
             address = form.save(commit=False)
             address.person = request.user
             address.save()
-            return redirect('profile',request.user.id)
+            return redirect('profile')
         else:
             form = addressform()
         return render(request, self.template_name, {'form': form})

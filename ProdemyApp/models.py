@@ -62,6 +62,10 @@ class AddressModel(models.Model):
     state = models.CharField(max_length=50)
     zip = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
+
+class aboutInstractor(models.Model):
+    person = models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.TextField(max_length=5000, blank=True)
     
 class CourseCategoryModel(models.Model):
     name = models.CharField(max_length=50)
