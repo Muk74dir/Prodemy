@@ -64,8 +64,8 @@ class AddressModel(models.Model):
     country = models.CharField(max_length=50)
     
 class CourseCategoryModel(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    name = models.CharField(max_length=50, unique = True)
+    slug = models.SlugField(max_length=50, unique = True)
     image = models.ImageField(upload_to='category_thumnail', blank=True, null=True)
     
     def __str__(self):
