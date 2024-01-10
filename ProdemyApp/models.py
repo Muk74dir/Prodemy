@@ -68,8 +68,8 @@ class aboutInstractor(models.Model):
     description = models.TextField(max_length=5000, blank=True)
     
 class CourseCategoryModel(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    name = models.CharField(max_length=50, unique = True)
+    slug = models.SlugField(max_length=50, unique = True)
     image = models.ImageField(upload_to='category_thumnail', blank=True, null=True)
     
     def __str__(self):
@@ -85,7 +85,6 @@ class CourseModel(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
     image = models.ImageField(upload_to='course_thumnail', blank=True, null=True)
-    
     uploaded_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
