@@ -59,7 +59,9 @@
                 {% if request.user.AccounType == "Student" %}
                 <a href="{% url 'mycourses' %}" class="nav-item nav-link">My Courses</a>
                 {% elif request.user.AccounType == "Instructor" %}
+                
                 <a href="{% url 'teacherDashboard' %}" class="nav-item nav-link">Dashboard</a>
+                <a href = '{% url 'create_category' %}' class = "nav-item nav-link">Create Category</a>
                 {% endif %}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
@@ -71,12 +73,13 @@
                 </div>
 
                 {% if user.id %}
+                <a href = '{% url 'category' %}' class = "nav-item nav-link">Category List</a>
                 <a href="{% url "profile" %}" class="nav-item nav-link">Profile</a>
                 <a href="{% url "transaction" %}" class="nav-item nav-link">Payment</a>
                 <a href="{% url "certificate_view" %}" class="nav-item nav-link">Crtfct</a>
                 {% endif %}
                 <a href="{% url 'player' 1 %}" class=" nav-item nav-link">About</a>
-
+                
                 <a href="#" class="nav-item nav-link">Contact</a>
                 {% if user.id %}
                 <a href="{% url 'logout' %}" class="nav-item nav-link">Log out</a>
