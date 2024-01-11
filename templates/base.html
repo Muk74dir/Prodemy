@@ -63,17 +63,17 @@
                 <a href="{% url 'teacherDashboard' %}" class="nav-item nav-link">Dashboard</a>
                 <a href = '{% url 'create_category' %}' class = "nav-item nav-link">Create Category</a>
                 {% endif %}
+                
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Category</a>
+                    <a href="{% url 'category' %}" class="nav-link">Category</a>
                     <div class="dropdown-menu bg-light m-0">
                         {% for category in Categories %}
-                        <a href="{% url 'category_details' category.slug %}" class="dropdown-item">{{category.name}}</a>
+                            <a href="{% url 'category_details' category.slug %}" class="dropdown-item">{{category.name}}</a>
                         {% endfor %}
                     </div>
-                </div>
+                </div>                
 
                 {% if user.id %}
-                <a href = '{% url 'category' %}' class = "nav-item nav-link">Category List</a>
                 <a href="{% url "profile" %}" class="nav-item nav-link">Profile</a>
                 <a href="{% url "transaction" %}" class="nav-item nav-link">Payment</a>
                 <a href="{% url "certificate_view" %}" class="nav-item nav-link">Crtfct</a>
