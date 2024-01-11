@@ -19,7 +19,7 @@
             <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
             {%endif%}
             <div class="category-details">
-                 <a href="#" class = "category-details" >Details</a>
+                 <a href={% url "category_details" category.slug %} class = "category-details" >Details</a>
             </div>
          
         </div>
