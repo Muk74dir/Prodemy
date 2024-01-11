@@ -20,6 +20,14 @@ from django.urls import reverse_lazy
 from django.utils.text import slugify
 
 
+# for transaction
+from django.http import HttpResponse 
+from django.views.generic import View, TemplateView, DetailView
+from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from .models import Transaction
+from .sslcommerz import sslcommerz_payment_gateway
 
 class SigninView(View):
     template_name = "account/register.html"  # Update with the correct template name
@@ -126,7 +134,7 @@ class addinfo(View):
 
 class editinfo(View):
     template_name = "account/updateprofile.html"
-    
+
     
     def get(self, request, *args, **kwargs):
         address = AddressModel.objects.get(person = request.user)
@@ -147,13 +155,13 @@ class editinfo(View):
         return render(request, self.template_name, {'form': form})
 
 
-          
 def teacherDashboard(request):
     return render(request, 'account/teacherDashboard.html')
 
 def certificate_view(request):
     context = {
-        'learner_name': 'Obaydul Hasan Nayeem',
+        'learner_name': request.user.name,
+        'email': request.user.email,
         'course_title': 'Introduction to Django',
         'issue_date': 'January 4, 2024',
         'instructor_name': 'Saiful Islam',
@@ -225,3 +233,68 @@ class CategoryDetailsView(View):
         Categories = CourseCategoryModel.objects.all()
         context = {'category': category, 'Courses' : course, 'Categories' : Categories}
         return render(request, self.template_name, context)
+    
+# for transactions ---------------------------
+class Index(TemplateView):
+    template_name = "transactions/index.html"
+
+def DonateView(request):
+    # name = request.POST['name']
+    name = request.user.name
+    # amount = request.POST['amount']
+    amount = '6500'
+    return redirect(sslcommerz_payment_gateway(request, name, amount))
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CheckoutSuccessView(View):
+    model = Transaction
+    template_name = 'mainsite/carts/checkout-success.html'
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse('nothing to see')
+
+    def post(self, request, *args, **kwargs):
+
+        data = self.request.POST
+
+        try:
+            Transaction.objects.create(
+                name = data['value_a'],
+                tran_id=data['tran_id'],
+                val_id=data['val_id'],
+                amount=data['amount'],
+                card_type=data['card_type'],
+                card_no=data['card_no'],
+                store_amount=data['store_amount'],
+                bank_tran_id=data['bank_tran_id'],
+                status=data['status'],
+                tran_date=data['tran_date'],
+                currency=data['currency'],
+                card_issuer=data['card_issuer'],
+                card_brand=data['card_brand'],
+                card_issuer_country=data['card_issuer_country'],
+                card_issuer_country_code=data['card_issuer_country_code'],
+                verify_sign=data['verify_sign'],
+                verify_sign_sha2=data['verify_sign_sha2'],
+                currency_rate=data['currency_rate'],
+                risk_title=data['risk_title'],
+                risk_level=data['risk_level'],
+
+            )
+            messages.success(request,'Payment Successful')
+
+        except:
+            messages.success(request,'Something Went Wrong')
+        return render(request, 'transactions/success.html')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CheckoutFaildView(View):
+    template_name = 'transactions/faild.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        return render(request, self.template_name)

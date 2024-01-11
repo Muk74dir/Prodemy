@@ -72,6 +72,8 @@
 
                 {% if user.id %}
                 <a href="{% url "profile" %}" class="nav-item nav-link">Profile</a>
+                <a href="{% url "transaction" %}" class="nav-item nav-link">Payment</a>
+                <a href="{% url "certificate_view" %}" class="nav-item nav-link">Crtfct</a>
                 {% endif %}
                 <a href="{% url 'player' 1 %}" class=" nav-item nav-link">About</a>
 
