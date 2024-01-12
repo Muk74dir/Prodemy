@@ -18,7 +18,7 @@ from .models import CourseModel, AnnouncementModel,CourseCategoryModel, CouponMo
 from .forms import AnnouncementForm
 from django.urls import reverse_lazy
 from django.utils.text import slugify
-from .globals import lst
+import requests
 
 # for transaction
 from django.http import HttpResponse 
@@ -328,17 +328,33 @@ def create_mcq(request):
     return render(request, 'account/create_mcq.html', {'form': form})
 
 
+
+
     
 def mcq(request):
+    lst = []
+    right = 0
+    wrong = 0
+    question = MCQModel.objects.all()[0]
     if request.user.is_authenticated:
+        
+        if request.method == "POST":
+            for i in range(1, 5):
+                selected = request.POST.get(f"option{i}")
+                if selected != None:
+                    break
+            print(selected, question.answer)
+            if selected == question.answer:
+                right += 1
+            print(right)
+            return redirect('results')
+    
         questions = MCQModel.objects.all()
         for q in questions:
             lst.append(q.id)
             print(lst)
-        response = render(request, 'account/mcq.html', {'questions': questions})
-        response.set_cookie('questions', ','.join(map(str, lst)))
-        return response
-    return redirect('results')
+            
+        return render(request, 'account/mcq.html', {'questions': questions})
 
 
 
