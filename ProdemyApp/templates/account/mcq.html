@@ -4,7 +4,7 @@
 <div class="container mx-auto">
     <h4 class="text-center mt-3">MCQ Questions</h4>
     <div class="d-flex justify-content-center">
-        <form method="POST" action="{% url 'results' %}">
+        <form method="POST">
             {% csrf_token %}
             {% for q in questions %}
             <div class="form-group" style="max-width: 520px; margin-top: 40px;">
@@ -12,29 +12,29 @@
             </div>
             <div class="form-check">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{q.question}}"
-                        id="gridRadios1_{{ forloop.counter }}" value="option1" checked>
+                    <input class="form-check-input" type="radio" name="option1"
+                        id="gridRadios1_{{ forloop.counter }}" value="{{q.option1}}">
                     <label class="form-check-label" for="gridRadios1_{{ forloop.counter }}">
                         {{q.option1}}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{q.question}}"
-                        id="gridRadios2_{{ forloop.counter }}" value="option2">
+                    <input class="form-check-input" type="radio" name="option2"
+                        id="gridRadios2_{{ forloop.counter }}" value="{{q.option2}}">
                     <label class="form-check-label" for="gridRadios2_{{ forloop.counter }}">
                         {{q.option2}}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{q.question}}"
-                        id="gridRadios3_{{ forloop.counter }}" value="option3">
+                    <input class="form-check-input" type="radio" name="option3"
+                        id="gridRadios3_{{ forloop.counter }}" value="{{q.option3}}">
                     <label class="form-check-label" for="gridRadios3_{{ forloop.counter }}">
                         {{q.option3}}
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="{{q.question}}"
-                        id="gridRadios4_{{ forloop.counter }}" value="option4">
+                    <input class="form-check-input" type="radio" name="option4"
+                        id="gridRadios4_{{ forloop.counter }}" value="{{q.option4}}">
                     <label class="form-check-label" for="gridRadios4_{{ forloop.counter }}">
                         {{q.option4}}
                     </label>
