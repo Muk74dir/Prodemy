@@ -1,10 +1,18 @@
 from django.contrib import admin
-from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel, QuestionModel, MCQModel
+from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel, AddressModel, aboutInstractor
 
 # Register your models here.
 @admin.register(User)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ['id','name','email']
+
+@admin.register(AddressModel)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id','person','street','city','state','zip','country']
+
+@admin.register(aboutInstractor)
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['id','person']
 
 @admin.register(CourseCategoryModel)
 class CourseCategoryAdmin(admin.ModelAdmin):
@@ -19,13 +27,3 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(AnnouncementModel)
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ['person', 'course', 'title', 'description', 'image']
-
-
-@admin.register(QuestionModel)
-class QuestionAdmin(admin.ModelAdmin):
-    list_display = ['person', 'course', 'title','description', 'file']
-
-@admin.register(MCQModel)
-class MCQAdmin(admin.ModelAdmin):
-    list_display = ['question', 'option1','option2', 'option3', 'option4', 'answer']
-    

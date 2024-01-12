@@ -9,10 +9,10 @@
 			<header class="mb-4">
 				<h4 class="card-title">Sign up</h4>
 			</header>
-			<form method="POST">
+			<form method="POST" enctype='multipart/form-data'>
 				{% csrf_token %}
 				{{form|crispy}}
-				<button type="submit" class="btn btn-primary btn-block"> Sign in </button>
+				<button type="submit" class="btn btn-primary btn-block"> Sign up </button>
 	</div>
 	</form>
 </section>

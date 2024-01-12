@@ -1,14 +1,21 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, AnnouncementModel,MCQModel
+from .models import User, AnnouncementModel,MCQModel, AddressModel, aboutInstractor
 from django.forms import ModelForm,Textarea
-from django.contrib.auth import forms
 from django import forms
-
 class RegistrationForm(UserCreationForm):
     class Meta:
         model =  User
-        fields = ['email','name','AccounType']
-   
+        fields = ['email','name','image','AccounType']
+        
+class addressform(forms.ModelForm):
+    class Meta:
+        model = AddressModel
+        fields = ['street', 'city', 'state', 'zip', 'country']
+
+class aboutform(forms.ModelForm):
+    class Meta:
+        model = aboutInstractor
+        fields = ['description']
 
 class AnnouncementForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -33,6 +40,7 @@ class AnnouncementForm(ModelForm):
                 'description' : ('Write Announcement Description'),
                 'image' : ('Add Announcement Image')
             }
+
 class MCQForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MCQForm, self).__init__(*args, **kwargs)
