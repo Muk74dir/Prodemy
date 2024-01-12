@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto">
+    <h4 class="text-center mt-3">MCQ Questions</h4>
+    <div class="d-flex justify-content-center">
+        <form method="POST" action="{% url 'results' %}">
+            {% csrf_token %}
+            {% for q in questions %}
+            <div class="form-group" style="max-width: 520px; margin-top: 40px;">
+                <label for="question">Q{{ forloop.counter }}: {{q.question}}</label>
+            </div>
+            <div class="form-check">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{q.question}}"
+                        id="gridRadios1_{{ forloop.counter }}" value="option1" checked>
+                    <label class="form-check-label" for="gridRadios1_{{ forloop.counter }}">
+                        {{q.option1}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{q.question}}"
+                        id="gridRadios2_{{ forloop.counter }}" value="option2">
+                    <label class="form-check-label" for="gridRadios2_{{ forloop.counter }}">
+                        {{q.option2}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{q.question}}"
+                        id="gridRadios3_{{ forloop.counter }}" value="option3">
+                    <label class="form-check-label" for="gridRadios3_{{ forloop.counter }}">
+                        {{q.option3}}
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{q.question}}"
+                        id="gridRadios4_{{ forloop.counter }}" value="option4">
+                    <label class="form-check-label" for="gridRadios4_{{ forloop.counter }}">
+                        {{q.option4}}
+                    </label>
+                </div>
+                <br>
+            </div>
+            {% endfor %}
+            <button class="btn btn-primary" id="save_ans">Submit Answer</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

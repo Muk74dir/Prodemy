@@ -27,4 +27,9 @@ urlpatterns = [
     path('transaction/', views.DonateView, name='transaction'),
     path('payment/success/', views.CheckoutSuccessView.as_view(), name='success'),
     path('payment/faild/', views.CheckoutFaildView.as_view(), name='faild'),
+    
+    #MCQ
+    path('create-mcq/', views.create_mcq, name='createmcq'),
+    path('mcq/', views.mcq, name='mcq'),
+    path('results/', views.result, name='results'),
 ]

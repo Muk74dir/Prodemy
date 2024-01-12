@@ -1,10 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User, AnnouncementModel
+from .models import User, AnnouncementModel,MCQModel, AddressModel, aboutInstractor
 from django.forms import ModelForm,Textarea
 from django import forms
-from .models import AddressModel,aboutInstractor
-from django.contrib.auth.decorators import login_required
-
 class RegistrationForm(UserCreationForm):
     class Meta:
         model =  User
@@ -44,3 +41,23 @@ class AnnouncementForm(ModelForm):
                 'image' : ('Add Announcement Image')
             }
 
+class MCQForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(MCQForm, self).__init__(*args, **kwargs)
+        self.fields['question'].widget.attrs.update({'class': 'form-control mb-2'})
+        self.fields['option1'].widget.attrs.update({'class': 'form-control mb-2'})
+        self.fields['option2'].widget.attrs.update({'class': 'form-control mb-2'})
+        self.fields['option3'].widget.attrs.update({'class': 'form-control mb-2'})
+        self.fields['option4'].widget.attrs.update({'class': 'form-control mb-2'})
+        self.fields['answer'].widget.attrs.update({'class': 'form-control mb-2'})
+    class Meta:
+        model = MCQModel
+        fields = ['question' , 'option1', 'option2', 'option3', 'option4', 'answer']
+        labels = {
+                'question' : ('Write Question'),
+                'option1' : ('Write Option 1'),
+                'option2' : ('Write Option 2'),
+                'option3' : ('Write Option 3'),
+                'option4' : ('Write Option 4'),
+                'answer' : ('Write Answer'),
+            }

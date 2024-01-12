@@ -6,11 +6,11 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Se
 
 from .models import CourseModel
 
-from .models import User,AddressModel
+from .models import User,AddressModel, MCQModel
 
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import View, CreateView,ListView
-from .forms import RegistrationForm
+from .forms import RegistrationForm, MCQForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 
 from django.contrib.auth import login,logout,authenticate
@@ -18,7 +18,7 @@ from .models import CourseModel, AnnouncementModel,CourseCategoryModel, CouponMo
 from .forms import AnnouncementForm
 from django.urls import reverse_lazy
 from django.utils.text import slugify
-
+from .globals import lst
 
 # for transaction
 from django.http import HttpResponse 
@@ -298,3 +298,73 @@ class CheckoutFaildView(View):
 
     def post(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+
+
+
+
+def create_mcq(request):
+    if request.method == 'POST':
+        form = MCQForm(request.POST)
+        if form.is_valid():
+            question = form.cleaned_data['question']
+            option1 = form.cleaned_data['option1']
+            option2 = form.cleaned_data['option2']
+            option3 = form.cleaned_data['option3']
+            option4 = form.cleaned_data['option4']
+            answer = form.cleaned_data['answer']
+            ques = MCQModel(
+                question=question,
+                option1=option1,
+                option2=option2,
+                option3=option3,
+                option4=option4,
+                answer=answer
+            )
+            ques.save()
+            print(ques)
+            return redirect('mcq')
+    form = MCQForm()
+    return render(request, 'account/create_mcq.html', {'form': form})
+
+
+    
+def mcq(request):
+    if request.user.is_authenticated:
+        questions = MCQModel.objects.all()
+        for q in questions:
+            lst.append(q.id)
+            print(lst)
+        response = render(request, 'account/mcq.html', {'questions': questions})
+        response.set_cookie('questions', ','.join(map(str, lst)))
+        return response
+    return redirect('results')
+
+
+
+
+def result(request):
+    if request.method == 'POST':
+        questions = MCQModel.objects.filter(pk__in=lst)
+        total_questions = len(lst)
+        score = 0
+        wrg = 0
+
+        for q in questions:
+            selected_option = request.POST.get(str(q.id)) 
+            print(selected_option)
+            print(q.question)
+            if selected_option == q.answer:
+                score += 1
+            else:
+                wrg += 1
+
+        context = {
+            'cur_score': score,
+            'cur_wrong': wrg,
+            'total_questions': total_questions,
+        }
+
+        return render(request, 'account/mcq_result.html', context)
+    else:
+        return redirect('mcq')
