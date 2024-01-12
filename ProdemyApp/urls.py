@@ -13,4 +13,7 @@ urlpatterns = [
     path('create-announcement/', views.Announcement, name = 'create_announcement'),
     path('delete-announcement/<int:announcement_id>/', views.DeleteAnnouncement, name='delete_announcement'),
     path('player/<int:id>', views.VideoPlayerView.as_view(), name='player'),
+    path('create-mcq/', views.create_mcq, name='createmcq'),
+    path('mcq/', views.mcq, name='mcq'),
+    path('results/', views.results, name='results'),
 ]

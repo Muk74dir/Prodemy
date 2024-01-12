@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel
+from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel, QuestionModel, MCQModel
 
 # Register your models here.
 @admin.register(User)
@@ -19,3 +19,13 @@ class CourseAdmin(admin.ModelAdmin):
 @admin.register(AnnouncementModel)
 class AnnouncementAdmin(admin.ModelAdmin):
     list_display = ['person', 'course', 'title', 'description', 'image']
+
+
+@admin.register(QuestionModel)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ['person', 'course', 'title','description', 'file']
+
+@admin.register(MCQModel)
+class MCQAdmin(admin.ModelAdmin):
+    list_display = ['question', 'option1','option2', 'option3', 'option4', 'answer']
+    

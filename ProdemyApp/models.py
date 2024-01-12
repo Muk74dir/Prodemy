@@ -138,6 +138,7 @@ class AssignmentSubmissionModel(models.Model):
     file = models.FileField(upload_to='assignment_submission_files', blank=True, null=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     
+
 class QuestionModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
@@ -146,13 +147,13 @@ class QuestionModel(models.Model):
     file = models.FileField(upload_to='question_files', blank=True, null=True)
     
 class MCQModel(models.Model):
-    question = models.ForeignKey(QuestionModel, on_delete=models.CASCADE)
+    question = models.CharField(max_length = 100)
     option1 = models.CharField(max_length=50)
     option2 = models.CharField(max_length=50)
     option3 = models.CharField(max_length=50)
     option4 = models.CharField(max_length=50)
     answer = models.CharField(max_length=50)
-    
+
 class CertificateModel(models.Model):
     person = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseModel, on_delete=models.CASCADE)
