@@ -328,59 +328,28 @@ def create_mcq(request):
     return render(request, 'account/create_mcq.html', {'form': form})
 
 
-
-
-    
 def mcq(request):
-    lst = []
     right = 0
     wrong = 0
-    question = MCQModel.objects.all()[0]
+
     if request.user.is_authenticated:
-        
         if request.method == "POST":
-            for i in range(1, 5):
-                selected = request.POST.get(f"option{i}")
-                if selected != None:
-                    break
-            print(selected, question.answer)
-            if selected == question.answer:
-                right += 1
-            print(right)
-            return redirect('results')
-    
+            questions = MCQModel.objects.all()
+            total = len(questions)
+            for question in questions:
+                selected = request.POST.get(f"option_{question.id}")
+                if selected == question.answer:
+                    right += 1
+                else:
+                    wrong += 1
+
+            return render(request, 'account/mcq_result.html', {'right': right, 'wrong': wrong, 'total':total})
+
         questions = MCQModel.objects.all()
-        for q in questions:
-            lst.append(q.id)
-            print(lst)
-            
+        
         return render(request, 'account/mcq.html', {'questions': questions})
 
-
-
+    return redirect('login')
 
 def result(request):
-    if request.method == 'POST':
-        questions = MCQModel.objects.filter(pk__in=lst)
-        total_questions = len(lst)
-        score = 0
-        wrg = 0
-
-        for q in questions:
-            selected_option = request.POST.get(str(q.id)) 
-            print(selected_option)
-            print(q.question)
-            if selected_option == q.answer:
-                score += 1
-            else:
-                wrg += 1
-
-        context = {
-            'cur_score': score,
-            'cur_wrong': wrg,
-            'total_questions': total_questions,
-        }
-
-        return render(request, 'account/mcq_result.html', context)
-    else:
-        return redirect('mcq')
+    return render(request, 'account/mcq_result.html')
