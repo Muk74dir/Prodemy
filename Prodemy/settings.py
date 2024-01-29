@@ -9,6 +9,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +54,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Prodemy.wsgi.application'
+ASGI_APPLICATION = 'Prodemy.asgi.application'
 
 DATABASES = {
     'default': {
@@ -89,3 +91,10 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}

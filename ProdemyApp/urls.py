@@ -32,4 +32,7 @@ urlpatterns = [
     path('create-mcq/', views.create_mcq, name='createmcq'),
     path('mcq/', views.mcq, name='mcq'),
     path('results/', views.result, name='results'),
+    
+    # Live Comment section
+    # path('group/<int:group_name>/', views.messageConsumers, name="messageConsumers")
 ]

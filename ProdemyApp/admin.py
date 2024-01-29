@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import User, CourseCategoryModel, CourseModel, AnnouncementModel, AddressModel, aboutInstractor
 from .models import MCQModel
-
+from . models import ChatComment, Group
 # Register your models here.
 @admin.register(User)
 class CourseAdmin(admin.ModelAdmin):
@@ -32,3 +32,12 @@ class AnnouncementAdmin(admin.ModelAdmin):
 @admin.register(MCQModel)
 class MCQAdmin(admin.ModelAdmin):
     list_display = ['id','question','option1','option2','option3','option4','answer']
+
+
+@admin.register(Group)
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name']
+
+@admin.register(ChatComment)
+class ChatConmmentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user', 'group', 'content', 'timestamp']

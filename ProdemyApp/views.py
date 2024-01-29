@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, Se
 
 from .models import CourseModel
 
-from .models import User,AddressModel, MCQModel
+from .models import User,AddressModel, MCQModel, Group,ChatComment
 
 from django.shortcuts import render, redirect,get_object_or_404
 from django.views.generic import View, CreateView,ListView
@@ -175,8 +175,18 @@ class VideoPlayerView(CreateView):
     context = {}
     
     def get(self, request, id):
+        group = Group.objects.filter(name=id).first()
+        chats=[]
+        if group:
+            chats = ChatComment.objects.filter(group=group)
+            self.context['chats']=chats
+        else:
+            groupname  = Group(name = id)
+            groupname.save()
+        
         course = CourseModel.objects.get(id=id)
         self.context['course'] = course
+        self.context['id'] = id
         return render(request, self.template_name, self.context)
 
 def Announcement(request):
@@ -210,7 +220,7 @@ class CategoryView(ListView):
 class CreateCategoryView(CreateView):
     model = CourseCategoryModel
     template_name = 'views/create_category.html'
-    fields = ('name',)
+    fields = ('name','image')
     success_url = reverse_lazy('category')
     
     def form_valid(self, form):
@@ -353,3 +363,14 @@ def mcq(request):
 
 def result(request):
     return render(request, 'account/mcq_result.html')
+
+
+# def messageConsumers(request, group_name):
+#     group = Group.objects.filter(name=group_name).first()
+#     if group:
+#         chats = ChatComment.objects.filter(group=group)
+#     else:
+#         groupname  = Group(name = group_name)
+#         groupname.save()
+#     print("group name from views========", group_name)
+#     return render(request, 'views/player.html', {'chats':chats, 'id':id})
