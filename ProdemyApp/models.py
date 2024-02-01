@@ -227,7 +227,7 @@ class PaymentGateway(models.Model):
 # chat in comment sections==================================
         
 class Group(models.Model):
-    name = models.CharField(max_length = 200)
+    name = models.CharField(max_length = 200, null=False)
     
     def __str__(self):
         return self.name

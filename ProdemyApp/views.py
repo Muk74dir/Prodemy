@@ -175,7 +175,8 @@ class VideoPlayerView(CreateView):
     context = {}
     
     def get(self, request, id):
-        group = Group.objects.filter(name=id).first()
+        group = Group.objects.filter(id=id).first()
+        print('group=========', group)
         chats=[]
         if group:
             chats = ChatComment.objects.filter(group=group)
@@ -227,10 +228,6 @@ class CreateCategoryView(CreateView):
         form.instance.slug = slugify(form.instance.name)
         return super().form_valid(form)
 
-# class CategoryTopDownView(ListView):
-#     model = CourseCategoryModel
-#     template_name = 'base.html'
-#     context_object_name = 'Categories'
 
 class CategoryDetailsView(View):
     template_name = 'views/category_details.html'  
@@ -243,6 +240,27 @@ class CategoryDetailsView(View):
         Categories = CourseCategoryModel.objects.all()
         context = {'category': category, 'Courses' : course, 'Categories' : Categories}
         return render(request, self.template_name, context)
+
+class CourceDetailsView(View):
+    template_name = 'views/CourceDetails.html'  
+    
+    def get(self, request, id=None):
+        group = CourseModel.objects.filter(id=id).first()
+        # print('group name cource details....title', group.title)
+        
+        group_id  = Group.objects.filter(name=group.title).first()
+        
+        # print('group name cource details....title_id', group_id)
+        chats=[]
+        if group_id:
+            chats = ChatComment.objects.filter(group=group_id)
+        else:
+            groupname  = Group(name = group.title)
+            groupname.save()
+        course = CourseModel.objects.get(id=id)
+        return render(request, self.template_name,{'course':course, 'id':group.title, 'chats': chats})
+        
+    
     
 # for transactions ---------------------------
 class Index(TemplateView):
@@ -364,13 +382,3 @@ def mcq(request):
 def result(request):
     return render(request, 'account/mcq_result.html')
 
-
-# def messageConsumers(request, group_name):
-#     group = Group.objects.filter(name=group_name).first()
-#     if group:
-#         chats = ChatComment.objects.filter(group=group)
-#     else:
-#         groupname  = Group(name = group_name)
-#         groupname.save()
-#     print("group name from views========", group_name)
-#     return render(request, 'views/player.html', {'chats':chats, 'id':id})

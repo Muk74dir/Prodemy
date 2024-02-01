@@ -18,10 +18,11 @@ urlpatterns = [
     path('create-announcement/', views.Announcement, name = 'create_announcement'),
     path('delete-announcement/<int:announcement_id>/', views.DeleteAnnouncement, name='delete_announcement'),
     path('player/<int:id>', views.VideoPlayerView.as_view(), name='player'),
+    # category 
     path('category/',views.CategoryView.as_view(), name = "category"),
     path('create_category/',views.CreateCategoryView.as_view(), name = 'create_category'),
     path('category_details/<str:slug>/',views.CategoryDetailsView.as_view(),name="category_details"),
-    
+    path('Cource/Details/<int:id>/',views.CourceDetailsView.as_view(), name="CourceDetails"),
     # for transactions -------------------
     path('transaction_home', views.Index.as_view(), name='transaction_home'),
     path('transaction/', views.DonateView, name='transaction'),

@@ -7,7 +7,6 @@
 
 <div class="category-container">
 
-    
 
    {% for course in Courses %}
    <div class="category-card">
@@ -22,7 +21,7 @@
        <div> {{ course.title }} </div>
      
        <div class="category-details">
-           <a href="#" class="category-details">Details</a>
+           <a href="{% url 'CourceDetails' course.id %}" class="category-details">Details</a>
        </div>
    </div>
    {% endfor %}
