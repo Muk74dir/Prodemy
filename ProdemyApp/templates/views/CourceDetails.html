@@ -1,0 +1,144 @@
+<!-- products_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+     <div class="small-container">
+         <div class="row">
+             <div class="col">
+                {% if course.image %}
+                <img src="{{ course.image.url }}" alt="Course Image">
+                {% endif %} 
+            </div>
+
+            <div class="col-8">
+                <ul>
+                    <li class="li">Course Title: {{course.title}}</li>
+                    <li class="title">Course Category:  {{course.category}}</li>
+                    <li class="title">Course instructor:  {{course.instructor.name}}</li>
+                    <li class="title">Course Description:  {{course.description}}</li>
+                    <li class="title">Course Price:  {{course.price }}</li>
+                </ul>
+                <a href="{% url 'player' course.id %}">
+                    <input id="chat-message-submit" type="button" value="Play">
+                </a>
+                
+            </div>   
+
+         </div>
+
+         <div class="chat">
+            <textarea id="chat-log" cols="80" rows="5">
+                {% for chat in chats %}
+                {{chat.user}}: {{chat.content}}
+                 {{chat.timestamp}}
+                {% endfor %}
+            </textarea>
+            <input id="chat-message-inputs" type="text" size="80" placeholder="More Details"><br>
+            <input id="chat-message-submits" type="button" value="Send" ><br>
+        </div>
+     </div>
+
+     
+     {{id|json_script:"group-name"}}
+
+
+
+<script>
+    const groupname = JSON.parse(document.getElementById('group-name').textContent)
+    
+    
+    console.log('group name=======', groupname)
+    
+    var ws = new WebSocket(
+        'ws://'
+        + window.location.host
+        +  '/ws/ajwc/'
+        + groupname 
+        + '/'
+        )
+
+    ws.onopen = function(){
+        console.log('webSocket connections Open...')
+    }
+
+    ws.onmessage = function(event) {
+        console.log('Message Received from Server...', event.data)
+        var data = JSON.parse(event.data)
+          console.log('event.data type==============', typeof data.msg);
+        
+         if (typeof data.msg !== 'undefined') {
+        console.log('Actual data from server...', data.msg);
+        var str = JSON.parse(data.msg);
+        console.log('str=============', str.user);
+        document.querySelector('#chat-log').value += (str.user + ': ' + str.msg + '\n');
+    } else {
+        document.querySelector('#chat-log').value += ("LogIn Required" + '\n');
+    }
+
+    }
+
+    ws.onclose = function(event)
+    {
+        console.error('Chat socket closed unexpectedly')
+    }
+
+   document.getElementById("chat-message-submits").onclick = function(event){
+    const messageInputDom = document.getElementById("chat-message-inputs")
+    const message = messageInputDom.value 
+    ws.send(JSON.stringify({
+        'msg':message
+    }))
+    messageInputDom.value = ""
+   }
+      
+</script>
+
+     <style>
+
+        #chat-message-submit{
+            width: 200px;
+            background-color: green;
+            color: white;
+        }
+
+        .chat {
+            margin-top: 5px;
+        }
+        .title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    
+        .col {
+            float: left;
+            width: 100%; /* Adjust the width as needed */
+            height: 80px;
+        }
+    
+        .col-4 {
+            float: left;
+            width: 50%; /* Adjust the width as needed */
+        }
+    
+        .small-container {
+            width: 80%;
+            margin: auto;
+        }
+    
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        .row{
+
+            margin-bottom: 10px;
+        }
+    
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    
+{% endblock %}

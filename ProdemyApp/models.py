@@ -224,3 +224,18 @@ class PaymentGateway(models.Model):
         verbose_name = "Payment Gateway"
         verbose_name_plural = "Payment Gateway"
         
+# chat in comment sections==================================
+        
+class Group(models.Model):
+    name = models.CharField(max_length = 200, null=False)
+    
+    def __str__(self):
+        return self.name
+
+
+class ChatComment(models.Model):
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
+    content = models.CharField(max_length=500)
+    timestamp = models.DateTimeField(auto_now=True)
+    user = models.CharField(max_length=100)
+        

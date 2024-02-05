@@ -16,7 +16,24 @@
       cursor: pointer;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+
+  textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+}
+
 </style>
+
+
+
 
 <section class="container d-flex align-items-center justify-content-center">
     <link href="https://vjs.zencdn.net/5.10.4/video-js.css" rel="stylesheet">
@@ -32,6 +49,18 @@
             </video>
         </div>
         <p>{{course.description}}</p>
+        <div col-6>
+        <textarea id="chat-log" class = "textarea" cols="60" rows="3">
+            {% for chat in chats %}
+                {{ chat.user }}: {{ chat.content }}
+                {{ chat.timestamp }}
+            {% endfor %}
+        </textarea> 
+        </div>
+
+        <input id="chat-message-input" type="text" size="80" placeholder="Write Comments"><br>
+        <input id="chat-message-submit" type="button" value="Send" ><br>
+        
     </div>
 
     <!-- Live Support Toaster -->
@@ -50,4 +79,61 @@
         document.getElementById('liveSupportToaster').style.display = 'block';
     }, 1);
 </script>
+
+
+{{id|json_script:"group-name"}}
+
+
+
+<script>
+    const groupname = JSON.parse(document.getElementById('group-name').textContent)
+    
+    
+    console.log('group name=======', groupname)
+    
+    var ws = new WebSocket(
+        'ws://'
+        + window.location.host
+        +  '/ws/ajwc/'
+        + groupname
+        + '/'
+        )
+
+    ws.onopen = function(){
+        console.log('webSocket connections Open...')
+    }
+
+    ws.onmessage = function(event) {
+        console.log('Message Received from Server...', event.data)
+        var data = JSON.parse(event.data)
+          console.log('event.data type==============', typeof data.msg);
+        
+         if (typeof data.msg !== 'undefined') {
+        console.log('Actual data from server...', data.msg);
+        var str = JSON.parse(data.msg);
+        console.log('str=============', str.user);
+        document.querySelector('#chat-log').value += (str.user + ': ' + str.msg + '\n');
+    } else {
+        document.querySelector('#chat-log').value += ("LogIn Required" + '\n');
+    }
+
+    }
+
+    ws.onclose = function(event)
+    {
+        console.error('Chat socket closed unexpectedly')
+    }
+
+   document.getElementById("chat-message-submit").onclick = function(event){
+    const messageInputDom = document.getElementById("chat-message-input")
+    const message = messageInputDom.value 
+    ws.send(JSON.stringify({
+        'msg':message
+    }))
+    messageInputDom.value = ""
+   }
+      
+</script>
+
+
 {% endblock %}
