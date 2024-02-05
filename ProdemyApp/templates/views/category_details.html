@@ -8,41 +8,61 @@
 <div class="category-container">
 
 
-   {% for course in Courses %}
-   <div class="category-card">
-       <div class="category_name">
-           {{ course.name }}
-       </div>
-       
-       {% if course.image %}
-       <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
-       {% endif %}
 
-       <div> {{ course.title }} </div>
-     
-       <div class="category-details">
-           <a href="{% url 'CourceDetails' course.id %}" class="category-details">Details</a>
-       </div>
-   </div>
-   {% endfor %}
+    {% for course in Courses %}
+    <div class="category-card">
+        <div class="category_name">
+            {{ course.name }}
+        </div>
+
+        {% if course.image %}
+        <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
+        {% endif %}
+
+        <div> {{ course.title }} </div>
+
+        <div class="category-details">
+            <a href="#" class="category-details">Details</a>
+        </div>
+    </div>
+    {% endfor %}
 
 </div>
 
 <style>
+    .course-name {
+        text-align: center;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
 
+    .course-buy a {
+        text-decoration: none;
+        padding: 10px;
+        color: white;
+    }
 
-    .category-container {
+    .category-details-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: around;
     }
 
+    .course-title {
+        margin-top: 20px;
+    }
+
+    .course-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .category-card {
-        width: 33%; /* Adjust as needed */
         margin-bottom: 20px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        box-sizing: border-box;
+        border: 1px solid rgb(200, 199, 199);
+        border-radius: 10px;
+        padding: 30px;
     }
 
     .category-image {
@@ -51,10 +71,10 @@
     }
 
     .category_name {
-        text-align: center; 
+        text-align: center;
         margin-top: 20px;
         font-size: 20px;
-        font-weight: bold; 
+        font-weight: bold;
         color: green;
         transition: color 0.5;
     }
@@ -65,17 +85,17 @@
         margin-top: 20px;
         font-size: 20px;
         font-weight: bold;
-        transition: color 1s; 
+        transition: color 1s;
     }
 
     .category_name:hover {
-        color: red; 
+        color: red;
     }
 
     .category-card:hover .category-image {
-        transform: scale(1.02); /* Apply a scale transformation on hover */
+        transform: scale(1.02);
+        /* Apply a scale transformation on hover */
     }
-        
 </style>
 
 {% endblock %}

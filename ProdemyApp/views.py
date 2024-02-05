@@ -381,4 +381,3 @@ def mcq(request):
 
 def result(request):
     return render(request, 'account/mcq_result.html')
-

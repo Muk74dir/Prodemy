@@ -1,75 +1,70 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class = "headline">Create Category</h2>
+<h2 class="headline">Create Category</h2>
 
-<form method="post" enctype="multipart/form-data" class = "Form">
-  {% csrf_token %}
-  
-  <div>
-    <label for="id_name">Name:</label>
-    <input placeholder = "Enter Category Name" type="text" id="id_name" name="name" required>
-  </div>
-  
-  <div>
-    <label for="id_image">Image:</label>
-    <input type="file" id="id_image" name="image" accept="image/*" >
-  </div>
-  
-  <button type="submit">Submit</button>
-</form>
+<div class="form-container">
+  <form method="post" enctype="multipart/form-data" class="Form">
+    {% csrf_token %}
+
+    <div>
+      <label for="id_name">Name:</label>
+      <input placeholder="Enter Category Name" type="text" id="id_name" name="name" required>
+    </div>
+
+    <div>
+      <label for="id_image">Image:</label>
+      <input type="file" id="id_image" name="image" accept="image/*">
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
 
 <style>
-
   .headline {
     text-align: center;
+    margin-bottom: 20px;
   }
 
-
-  <style>
-    body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+  .form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    margin: 0;
   }
-  
+
   form {
-      width: 30%;
-      border: 1px solid #ccc;
-      padding: 20px;
-      box-shadow: center;
-      margin: 50px; /* Add margin for space around the form */
-      box-sizing: center; /* Include padding and border in the total width */
+    width: 40%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: center;
   }
-  
+
   div {
-      margin-bottom: 15px;
+    margin-bottom: 15px;
   }
-  
+
   label {
-      display: block;
-      margin-bottom: 5px;
+    display: block;
+    margin-bottom: 5px;
   }
-  
+
   input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
   }
-  
+
   button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
-  
 </style>
 
 {% endblock %}
-
-
