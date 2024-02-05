@@ -48,6 +48,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'ContextProcessor.context_processors.Categories',
+                'ContextProcessor.context_processors.Course',
+                'ContextProcessor.context_processors.Users',
             ],
         },
     },
