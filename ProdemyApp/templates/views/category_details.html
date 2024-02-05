@@ -5,24 +5,27 @@
 
 <h1 style="text-align: center; margin: 20px; ">{{category.name}}</h1>
 
-<div class="category-container">
-
-
-
+<div class="category-container container">
     {% for course in Courses %}
     <div class="category-card">
         <div class="category_name">
             {{ course.name }}
         </div>
+        <div class="image-container">
+            {% if course.image %}
+            <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
+            {% endif %}
+        </div>
 
-        {% if course.image %}
-        <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
-        {% endif %}
+        <div>
+            <h4>{{ course.title }}</h4>
+            <p>{{ course.description }}</p>
+            <p class="text-danger fw-semibold"> Price : {{ course.price }}$</p>
+        </div>
 
-        <div> {{ course.title }} </div>
-
-        <div class="category-details">
-            <a href="#" class="category-details">Details</a>
+        <div class="buy-now-btn">
+            <a href="#" class="btn-primary">Buy Now</a>
+            <a href="#" class="btn-primary ms-2">Play</a>
         </div>
     </div>
     {% endfor %}
@@ -50,6 +53,13 @@
 
     .course-title {
         margin-top: 20px;
+    }
+
+    .buy-now-btn a {
+        text-decoration: none;
+        padding: 10px 15px;
+        color: #fff;
+        font-weight: bold;
     }
 
     .course-image-container {
@@ -94,7 +104,6 @@
 
     .category-card:hover .category-image {
         transform: scale(1.02);
-        /* Apply a scale transformation on hover */
     }
 </style>
 
