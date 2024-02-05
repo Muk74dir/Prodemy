@@ -3,29 +3,26 @@
 
 {% block content %}
 
-<h1 class="course-name">Welcome to {{category.name}} course, {{request.user}}</h1>
+<h1 style="text-align: center; margin: 20px; ">{{category.name}}</h1>
 
-<div class="category-details-container container">
+<div class="category-container">
+
+
+
     {% for course in Courses %}
     <div class="category-card">
         <div class="category_name">
             {{ course.name }}
         </div>
 
-        <div class="course-image-container">
-            {% if course.image %}
-            <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
-            {% endif %}
-        </div>
+        {% if course.image %}
+        <img src="{{ course.image.url }}" alt="{{ course.name }}" class="category-image">
+        {% endif %}
 
-        <div>
-            <h4 class="course-title">{{ course.title }}</h4>
-            <p class="course-description">{{course.description}}</p>
-            <p class="course-price">Price : {{course.price}}</p>
-            <p class="course-rating">Rating : {{course.rating}}</p>
-        </div>
-        <div class="course-buy">
-            <a href="#" class="category-details bg-primary">Buy Now</a>
+        <div> {{ course.title }} </div>
+
+        <div class="category-details">
+            <a href="#" class="category-details">Details</a>
         </div>
     </div>
     {% endfor %}
