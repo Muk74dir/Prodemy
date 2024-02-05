@@ -160,73 +160,36 @@
 <div class="container-xxl courses my-6 py-6 pb-0">
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-            <h6 class="text-primary text-uppercase mb-2">Tranding Courses</h6>
-            <h1 class="display-6 mb-4">Our Courses Upskill You With Driving Training</h1>
+            <h6 class="text-primary text-uppercase mb-2">Trending Courses</h6>
+            <h1 class="display-6 mb-4">Our Courses Upskill You With Fundamental Training</h1>
         </div>
         <div class="row g-4 justify-content-center">
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="courses-item d-flex flex-column bg-white overflow-hidden h-100">
-                    <div class="text-center p-4 pt-0">
-                        <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$99</div>
-                        <h5 class="mb-3">Automatic Car Lessons</h5>
-                        <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                        <ol class="breadcrumb justify-content-center mb-0">
-                            <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Beginner
-                            </li>
-                            <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>3 Week
-                            </li>
-                        </ol>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" src="img/courses-1.jpg" alt="">
-                        <div class="courses-overlay">
-                            <a class="btn btn-outline-primary border-2" href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="courses-item d-flex flex-column bg-white overflow-hidden h-100">
-                    <div class="text-center p-4 pt-0">
-                        <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$99</div>
-                        <h5 class="mb-3">Highway Driving Lesson</h5>
-                        <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
-                        <ol class="breadcrumb justify-content-center mb-0">
-                            <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Beginner
-                            </li>
-                            <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>3 Week
-                            </li>
-                        </ol>
-                    </div>
-                    <div class="position-relative mt-auto">
-                        <img class="img-fluid" src="img/courses-2.jpg" alt="">
-                        <div class="courses-overlay">
-                            <a class="btn btn-outline-primary border-2" href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% for course in courses %}
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="courses-item d-flex flex-column bg-white overflow-hidden h-100">
                     <div class="text-center p-4 pt-0">
-                        <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">$99</div>
-                        <h5 class="mb-3">International Driving</h5>
-                        <p>Tempor erat elitr rebum at clita dolor diam ipsum sit diam amet diam et eos</p>
+                        <div class="d-inline-block bg-primary text-white fs-5 py-1 px-4 mb-4">${{course.price}}</div>
+                        <h5 class="mb-3">{{course.title}}</h5>
+                        <p>{{course.description}}/p>
                         <ol class="breadcrumb justify-content-center mb-0">
-                            <li class="breadcrumb-item small"><i class="fa fa-signal text-primary me-2"></i>Beginner
+                            <li class="breadcrumb-item small"><i
+                                    class="fa fa-star text-primary me-2"></i>{{course.rating}}
                             </li>
-                            <li class="breadcrumb-item small"><i class="fa fa-calendar-alt text-primary me-2"></i>3 Week
-                            </li>
+
                         </ol>
                     </div>
                     <div class="position-relative mt-auto">
-                        <img class="img-fluid" src="{% static 'img/courses-3.jpg' %}" alt="">
+                        <div style="display: flex; justify-content: center;align-items: center;">
+                            <img class="img-fluid" src="{{ course.image.url }}" alt="">
+                        </div>
                         <div class="courses-overlay">
                             <a class="btn btn-outline-primary border-2" href="">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
+
 
         </div>
     </div>
@@ -240,7 +203,7 @@
         <div class="row g-5">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <h6 class="text-primary text-uppercase mb-2">Why Choose Us!</h6>
-                <h1 class="display-6 mb-4">Best Driving Training Agency In Your City</h1>
+                <h1 class="display-6 mb-4">Best Online Training Platform In Worldwide.</h1>
                 <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et
                     eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                 <div class="row gy-5 gx-4">
@@ -249,7 +212,7 @@
                             <div class="flex-shrink-0 btn-square bg-primary me-3">
                                 <i class="fa fa-check text-white"></i>
                             </div>
-                            <h5 class="mb-0">Fully Licensed</h5>
+                            <h5 class="mb-0">Fully Certified</h5>
                         </div>
                         <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
                     </div>
@@ -284,9 +247,10 @@
             </div>
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                 <div class="position-relative overflow-hidden pe-5 pt-5 h-100" style="min-height: 400px;">
-                    <img class="position-absolute w-100 h-100" src="img/about-1.jpg" alt="" style="object-fit: cover;">
-                    <img class="position-absolute top-0 end-0 bg-white ps-3 pb-3" src="img/about-2.jpg" alt=""
-                        style="width: 200px; height: 200px">
+                    <img class="position-absolute w-100 h-100" src="{% static 'img/why2.jpg' %}" alt=""
+                        style="object-fit: cover;">
+                    <img class="position-absolute top-0 end-0 bg-white ps-3 pb-3" src="{% static 'img/why1.jpg' %}"
+                        alt="" style="width: 200px; height: 200px">
                 </div>
             </div>
         </div>
@@ -300,14 +264,15 @@
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
             <h6 class="text-primary text-uppercase mb-2">Meet The Team</h6>
-
-            <h1 class="display-6 mb-4">We Have Great Experience Of Driving</h1>
+            <h1 class="display-6 mb-4">We Have Great Experience Of Learning</h1>
         </div>
         <div class="row g-0 team-items">
+            {% for user in users %}
+            {% if user.AccounType == 'Instructor' %}
             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="team-item position-relative">
                     <div class="position-relative">
-                        <img class="img-fluid" src="img/team-1.jpg" alt="">
+                        <img class="img-fluid" style="height: 300px;" src="{{user.image.url}}" alt="">
                         <div class="team-social text-center">
                             <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
                                     class="fab fa-facebook-f"></i></a>
@@ -318,68 +283,13 @@
                         </div>
                     </div>
                     <div class="bg-light text-center p-4">
-                        <h5 class="mt-2">Full Name</h5>
+                        <h5 class="mt-2">{{user.name}}</h5>
                         <span>Trainer</span>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                <div class="team-item position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/team-2.jpg" alt="">
-                        <div class="team-social text-center">
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="mt-2">Full Name</h5>
-                        <span>Trainer</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                <div class="team-item position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/team-3.jpg" alt="">
-                        <div class="team-social text-center">
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="mt-2">Full Name</h5>
-                        <span>Trainer</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                <div class="team-item position-relative">
-                    <div class="position-relative">
-                        <img class="img-fluid" src="img/team-4.jpg" alt="">
-                        <div class="team-social text-center">
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-outline-primary border-2 m-1" href=""><i
-                                    class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-light text-center p-4">
-                        <h5 class="mt-2">Full Name</h5>
-                        <span>Trainer</span>
-                    </div>
-                </div>
-            </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
