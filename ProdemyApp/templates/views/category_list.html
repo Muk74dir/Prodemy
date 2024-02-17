@@ -3,77 +3,85 @@
 
 {% block content %}
 
-<h1 style="text-align: center; margin: 20px; ">Category List</h1>
+<h2 class="category-heading">Course Categories</h2>
 
-<div class="category-container">
-
+<div class="category-container container">
     <div class="category_name">
         {{category.name }}
-   </div>
+    </div>
     {% for category in Categories %}
-        <div class="category-card">
-            <div class="category_name">
-                {{category.name }}
-           </div>
-             {% if category.image%}
-            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+    <div class="category-card">
+        <div class="course-details">
+
+            {% if category.image%}
+            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="course-image">
             {%endif%}
-            <div class="category-details">
-                 <a href={% url "category_details" category.slug %} class = "category-details" >Details</a>
-            </div>
-         
+            <h3 class="course-title">{{ category.name }}</h3>
         </div>
+        <div class="category-details">
+            <a href="{% url 'category_details' category.slug %}" class="category-details">See Details</a>
+        </div>
+
+    </div>
     {% endfor %}
 </div>
 
-<style>   
+<style>
+    .course-details {
+        text-align: center;
+    }
+
+    .course-title {
+        text-align: left;
+        font-size: 20px;
+        margin-top: 20px;
+    }
+
+    .course-image {
+        height: 300px;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .category-heading {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
     .category-container {
         display: flex;
         flex-wrap: wrap;
-        justify-content: around;
+        border-radius: 20px;
     }
 
     .category-card {
-        width: 33%; /* Adjust as needed */
         margin-bottom: 20px;
-        border: 1px solid #ddd;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    .category-image {
-        max-width: 100%;
-        height: auto;
+        border: 1px solid rgb(200, 199, 199);
+        border-radius: 10px;
+        padding: 30px;
     }
 
     .category_name {
-        text-align: center; 
+        text-align: center;
         margin-top: 20px;
         font-size: 20px;
-        font-weight: bold; 
+        font-weight: bold;
         color: green;
         transition: color 0.5;
     }
 
     .category-details {
-        color: green;
-        text-align: center;
-        margin-top: 20px;
+        color: blue;
+        text-align: left;
+        margin-top: 10px;
         font-size: 20px;
-        font-weight: bold;
-        transition: color 1s; 
     }
 
-    .category_name:hover {
-        color: red; 
-    }
 
     .category-card:hover .category-image {
-        transform: scale(1.02); /* Apply a scale transformation on hover */
+        transform: scale(1.02);
+        /* Apply a scale transformation on hover */
     }
-
-    
-    
 </style>
 
 {% endblock %}
